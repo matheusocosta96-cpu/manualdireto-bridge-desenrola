@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ícone pequeno das notificações: o sistema usa só a silhueta. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="48" android:viewportHeight="48">
+    <path android:fillColor="#FFFFFFFF"
+        android:pathData="M8,34L20,22L28,28L40,10L40,20L29,37L20,31L8,43Z" />
+</vector>

@@ -1,0 +1,52 @@
+plugins { id 'com.android.application' }
+
+def appVersion = new Properties()
+file('../version.properties').withInputStream { appVersion.load(it) }
+
+android {
+    namespace 'br.pessoal.trajetoria'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'br.pessoal.trajetoria'
+        minSdk 26
+        targetSdk 35
+        versionCode appVersion.getProperty('versionCode') as Integer
+        versionName appVersion.getProperty('versionName')
+    }
+
+    sourceSets {
+        main { java.srcDirs += ['build/generated/version'] }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+    }
+}
+
+// Mantém BuildInfo.java alinhado com version.properties, igual ao build sem SDK.
+tasks.register('generateBuildInfo') {
+    def out = file('build/generated/version/br/pessoal/trajetoria/BuildInfo.java')
+    outputs.file(out)
+    doLast {
+        out.parentFile.mkdirs()
+        out.text = """package br.pessoal.trajetoria;
+
+final class BuildInfo {
+    static final String VERSION_NAME = "${appVersion.getProperty('versionName')}";
+    static final int VERSION_CODE = ${appVersion.getProperty('versionCode')};
+    private BuildInfo() { }
+}
+"""
+    }
+}
+tasks.matching { it.name.startsWith('compile') && it.name.endsWith('JavaWithJavac') }.configureEach {
+    dependsOn 'generateBuildInfo'
+}

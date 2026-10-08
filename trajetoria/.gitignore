@@ -1,0 +1,9 @@
+node_modules/
+android/build/
+android/.buildtools/
+android/.gradle/
+android/app/build/
+# Chave de assinatura: nunca entra no repositório.
+android/keystore/
+*.jks
+*.keystore

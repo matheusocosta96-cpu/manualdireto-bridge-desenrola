@@ -1,0 +1,16 @@
+name = "trajetoria-ia"
+main = "worker.js"
+compatibility_date = "2026-01-01"
+
+[vars]
+PROVIDER = "anthropic"       # "anthropic" ou "openai"
+MODEL = "claude-haiku-5-5"   # troque pelo modelo que você escolher
+MAX_TOKENS = "1200"
+DAILY_LIMIT = "60"
+MONTHLY_LIMIT = "800"
+
+# Crie o namespace com: wrangler kv namespace create USAGE
+# e cole o id abaixo.
+[[kv_namespaces]]
+binding = "USAGE"
+id = "COLE_AQUI_O_ID_DO_KV"
